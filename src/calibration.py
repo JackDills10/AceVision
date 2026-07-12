@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import json
 
 # Known size of a US quarter
 QUARTER_DIAMETER_INCHES = 0.955
@@ -41,6 +42,9 @@ if circles is not None:
     print(f"Quarter detected")
     print(f"Diameter: {diameter_pixels}px")
     print(f"Scale: {pixels_per_inch:.2f} pixels/inch")
+    with open("calibration/calibration_data.json", "w") as file:
+        json.dump({"pixels_per_inch": pixels_per_inch}, file, indent=4)
+    print("Calibration saved")
 
     cv2.circle(
         image,
